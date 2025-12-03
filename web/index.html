@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chest X‑Ray Multi‑Label Disease Classification</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div class="brand">
+        <div class="brand-mark">CX</div>
+        <div class="brand-text">
+          <h1>Chest X‑Ray AI</h1>
+          <p>Multi‑label disease classification with DenseNet121</p>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#demo">Demo</a>
+        <a href="#about">How it works</a>
+        <a href="#labels">Labels</a>
+      </nav>
+    </header>
+
+    <main class="main">
+      <!-- Hero -->
+      <section class="hero" id="demo">
+        <div class="hero-content">
+          <h2>Upload a chest X‑ray and let the model highlight possible findings.</h2>
+          <p>
+            This interface is built on top of your PyTorch model (
+            <code>best_model.pth</code>) trained on cleaned CheXpert‑style labels.
+          </p>
+          <div class="hero-actions">
+            <label class="btn-primary">
+              <input type="file" id="xrayInput" accept="image/*" hidden />
+              <span>Upload X‑ray</span>
+            </label>
+            <button id="sampleBtn" class="btn-secondary" type="button">
+              Use sample image
+            </button>
+          </div>
+          <p class="hint">
+            Note: This is a research/demo UI only and not a medical device.
+          </p>
+        </div>
+        <div class="hero-card">
+          <div class="image-frame">
+            <img id="previewImage" src="" alt="X‑ray preview" class="image hidden" />
+            <div id="previewPlaceholder" class="placeholder">
+              <span class="placeholder-icon">🩻</span>
+              <p>Preview will appear here after you select an image.</p>
+            </div>
+          </div>
+          <div class="results">
+            <div class="results-header">
+              <h3>Model Output</h3>
+              <div class="threshold-group">
+                <label for="thresholdRange">Threshold</label>
+                <input type="range" id="thresholdRange" min="0.1" max="0.9" step="0.05" value="0.5" />
+                <span id="thresholdValue">0.50</span>
+              </div>
+            </div>
+            <div id="resultsBadges" class="badge-container">
+              <!-- JS will inject prediction badges here -->
+            </div>
+            <div id="metricsTable" class="metrics-table hidden">
+              <!-- JS will inject metrics table here -->
+            </div>
+            <div id="resultsMeta" class="results-meta">
+              <p>Select an X‑ray to see predicted labels.</p>
+            </div>
+            <button id="runInferenceBtn" class="btn-full" type="button">
+              Run AI analysis
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- How it works -->
+      <section class="info-grid" id="about">
+        <article class="info-card">
+          <h3>Under the hood</h3>
+          <p>
+            The backend model is a DenseNet121 network fine‑tuned for
+            <strong>multi‑label classification</strong> on chest X‑rays. It
+            predicts the presence of multiple pathologies per image.
+          </p>
+          <ul>
+            <li>Input size: 224×224, RGB, ImageNet normalization</li>
+            <li>Loss: <code>BCEWithLogitsLoss</code></li>
+            <li>Optimizer: Adam</li>
+            <li>Metric: Macro‑F1 across all labels</li>
+          </ul>
+        </article>
+        <article class="info-card">
+          <h3>How to connect this UI</h3>
+          <ol>
+            <li>Expose a REST endpoint in Python (e.g. via FastAPI / Flask) that wraps <code>predict_visualize.py</code> or its core logic.</li>
+            <li>Accept an uploaded image and a threshold value, then return predicted labels as JSON.</li>
+            <li>Update <code>app.js</code> to POST the selected image to that endpoint instead of using mock results.</li>
+          </ol>
+        </article>
+        <article class="info-card warning">
+          <h3>Clinical disclaimer</h3>
+          <p>
+            This tool is for research and educational purposes only. It
+            <strong>must not</strong> be used for real‑world diagnosis or
+            treatment decisions without proper clinical validation and
+            regulatory approval.
+          </p>
+        </article>
+      </section>
+
+      <!-- Labels -->
+      <section class="labels-section" id="labels">
+        <h2>Supported disease labels</h2>
+        <p>
+          The current model outputs probabilities for the following 9 labels:
+        </p>
+        <div class="labels-grid">
+          <div class="label-chip">Atelectasis</div>
+          <div class="label-chip">Consolidation</div>
+          <div class="label-chip">Edema</div>
+          <div class="label-chip">Effusion</div>
+          <div class="label-chip">Infiltration</div>
+          <div class="label-chip">Mass</div>
+          <div class="label-chip">Nodule</div>
+          <div class="label-chip">Pneumothorax</div>
+          <div class="label-chip neutral">No Finding</div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>
+        Built on top of your
+        <code>Chest-X-Ray-Multi-Label-Disease-Classification-using-Deep-Learning</code>
+        PyTorch project.
+      </p>
+    </footer>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
+
+
