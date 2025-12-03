@@ -155,15 +155,17 @@ fileInput.addEventListener("change", (e) => {
   showImagePreview(file);
 });
 
-sampleBtn.addEventListener("click", () => {
-  // Front-end only demo image (no real file to send to backend)
-  selectedFile = null;
-  previewImage.src =
-    "https://dummyimage.com/640x480/020617/9ca3af&text=Sample+Chest+X-ray+(demo+only)";
-  previewImage.classList.remove("hidden");
-  previewPlaceholder.classList.add("hidden");
-  resetResults();
-});
+if (sampleBtn) {
+  sampleBtn.addEventListener("click", () => {
+    // Front-end only demo image (no real file to send to backend)
+    selectedFile = null;
+    previewImage.src =
+      "https://dummyimage.com/640x480/020617/9ca3af&text=Sample+Chest+X-ray+(demo+only)";
+    previewImage.classList.remove("hidden");
+    previewPlaceholder.classList.add("hidden");
+    resetResults();
+  });
+}
 
 thresholdRange.addEventListener("input", () => {
   updateThresholdLabel();
