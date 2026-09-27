@@ -1,1 +1,3 @@
 resized
+__pycache__/
+*.pyc

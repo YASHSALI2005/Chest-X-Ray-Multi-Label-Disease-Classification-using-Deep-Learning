@@ -1,5 +1,17 @@
 ## Chest X-Ray Multi-Label Disease Classification (PyTorch)
 
+<p align="center">
+  <img src="docs/screenshot.png" alt="Chest X-Ray AI screenshot" width="100%" />
+</p>
+
+<p align="center">
+  <a href="https://chest-x-ray-multi-label-disease.onrender.com/"><img src="https://img.shields.io/badge/Live%20demo-Open-22c55e?style=for-the-badge" alt="Live demo" /></a>
+  <img src="https://img.shields.io/badge/Model-DenseNet121-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="DenseNet121" />
+  <a href="https://www.yashsali.me"><img src="https://img.shields.io/badge/Portfolio-yashsali.me-7c3aed?style=for-the-badge" alt="Portfolio" /></a>
+</p>
+
+> ⏳ The demo runs on a free tier and may take ~1 minute to wake up.
+
 This project trains a DenseNet121 model to predict multiple chest X-ray diseases per image using a cleaned labels CSV and a folder of resized images. It supports training, validation, prediction, and visualization with ground-truth comparison.
 
 ### Folder Structure
