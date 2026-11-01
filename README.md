@@ -132,3 +132,8 @@ python predict_visualize.py "resized\\00030350_000.png" --csv labels_clean.csv -
 ```
 
 
+### Contributing
+Contributions are welcome! To contribute:
+1. Fork the repository and create a new branch for your change.
+2. Make your changes and test them locally.
+3. Open a pull request with a short description of what you changed and why.
